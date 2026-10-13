@@ -39,7 +39,7 @@ function iconsFor(type, qty) {
   // }
   for (let i = 1; i <= cap; i++) {
     if (i % 3 === 0 && i < cap) {
-      icons += "\n          ";
+      icons += "\n             ";
     }
     icons += icon;
   }
