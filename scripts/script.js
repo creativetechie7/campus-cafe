@@ -58,6 +58,19 @@ function processQuote(type, qty, isStudent, reusableCup) {
   // taxableAmount = subtotal - studentDiscount + ecoFee - bulkDiscount
   // tax = 5% (TAX_RATE) of taxableAmount
   // total = taxableAmount + tax
+
+  const subtotal = unitPrice * qty;
+  /* Condition ? valueIfTrue : valueIfFalse */
+  const studentDiscount = isStudent ? subtotal * STUDENT_RATE : 0;
+  const bulkDiscount = qty >= BULK_QTY ? BULK_OFF : 0;
+  const ecoFee = type === "coffee" && reusableCup === false ? ECO_FEE : 0;
+
+  const taxableAmount = subtotal - studentDiscount + ecoFee - bulkDiscount;
+
+  const tax = taxableAmount * TAX_RATE;
+
+  const total = taxableAmount + tax;
+
   return {
     unitPrice,
     subtotal,
@@ -92,13 +105,13 @@ TOTAL: ${money(calc.total)}`;
  - Show a clear error in #receipt
 */
 function showError(msg) {
-  /* Add JS code here */
+  document.getElementById("receipt").textContent = msg;
 }
 /* TODO (JS #6):
  - Reset #receipt to "No order data."
 */
 function resetUI() {
-  /* Add JS code here */
+  document.getElementById("receipt").textContent = "No order data.";
 }
 async function loadWeather() {
   const box = document.getElementById("weatherBox");
@@ -135,10 +148,16 @@ function main() {
  - must be between 1 and 10
  - if invalid: showError(...) and stop
  */
+
+    if (!Number.isInteger(qty) || qty < 1 || qty > 10) {
+      showError("Please enter a valid quantity between 1 and 10.");
+      return;
+    }
     /* TODO (JS #8):
  - Add a confirm() dialog here to ask for student discounts
  - Store the result in a variable named isStudent
  */
+    const isStudent = confirm("Are you a student?");
     const reusableCup =
       type === "coffee"
         ? confirm("Brought reusable cup(s)? (+$1.00 otherwise)")
