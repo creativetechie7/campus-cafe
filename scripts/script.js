@@ -14,9 +14,7 @@ function money(n) {
 */
 function normalizeType(raw) {
   /* Add JS code here */
-
-    }
-  return raw.trim();
+  return raw?.trim().toLowerCase() ?? "";
 }
 /* TODO (JS #2):
  - return true only for "coffee", "sandwich", "salad"
