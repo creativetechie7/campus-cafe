@@ -29,8 +29,8 @@ function isValidType(t) {
  - should add a line break and an indentation after every 3 icons
 */
 function iconsFor(type, qty) {
-  const map = { coffee: " ", sandwich: " ", salad: " " };
-  const icon = map[type] || " ";
+  const map = { coffee: "☕️", sandwich: "🥪", salad: "🥗" };
+  const icon = map[type] || "❓";
   const cap = Math.min(qty, 10);
   let icons = "";
   // for (...) {
@@ -39,7 +39,7 @@ function iconsFor(type, qty) {
   // }
   for (let i = 1; i <= cap; i++) {
     if (i % 3 === 0 && i < cap) {
-      icons += "\n  ";
+      icons += "\n          ";
     }
     icons += icon;
   }
@@ -87,19 +87,19 @@ function buildReceipt(type, qty, isStudent, reusableCup, calc) {
   const cupText = type === "coffee" ? (reusableCup ? "Yes" : "No") : "N/A";
   return `CAMPUS CAFÉ RECEIPT
 ------------------------
-Item: ${type}
-Unit price: ${money(calc.unitPrice)}
-Quantity: ${qty}
-          ${icons}
+Item:          ${type}
+Unit price:    ${money(calc.unitPrice)}
+Quantity:      ${qty}
+               ${icons}
 Student disc.: ${studentText}
-Reusable cup: ${cupText}
-Subtotal: ${money(calc.subtotal)}
+Reusable cup:  ${cupText}
+Subtotal:      ${money(calc.subtotal)}
 Student -10%: -${money(calc.studentDiscount)}
-Eco cup fee: ${money(calc.ecoFee)}
-Bulk deal: -${money(calc.bulkDiscount)}
-Tax (5%): ${money(calc.tax)}
+Eco cup fee:   ${money(calc.ecoFee)}
+Bulk deal:    -${money(calc.bulkDiscount)}
+Tax (5%):      ${money(calc.tax)}
 ------------------------
-TOTAL: ${money(calc.total)}`;
+TOTAL:         ${money(calc.total)}`;
 }
 /* TODO (JS #5):
  - Show a clear error in #receipt
