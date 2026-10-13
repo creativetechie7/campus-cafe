@@ -13,14 +13,15 @@ function money(n) {
  - if raw is null, it should return an empty string to avoid errors on .trim()
 */
 function normalizeType(raw) {
-  /* Add JS code here */
+  /* if raw null or undefined, return "" else trim and lowercase it*/
   return raw?.trim().toLowerCase() ?? "";
 }
 /* TODO (JS #2):
  - return true only for "coffee", "sandwich", "salad"
 */
 function isValidType(t) {
-  /* Add JS code here */
+  /* if t == coffee, or sandwich, or salad*/
+  return ["coffee", "sandwich", "salad"].includes(t);
 }
 /* TODO (JS #3):
  - use a for loop to repeat an icon up to 10 times
@@ -36,6 +37,12 @@ function iconsFor(type, qty) {
   // ...
   // icons += icon;
   // }
+  for (let i = 1; i <= cap; i++) {
+    if (i % 3 === 0 && i < cap) {
+      icons += "\n  ";
+    }
+    icons += icon;
+  }
   return icons;
 }
 /* TODO (JS #4):
