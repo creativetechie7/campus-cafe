@@ -157,10 +157,12 @@ function main() {
  - Add a confirm() dialog here to ask for student discounts
  - Store the result in a variable named isStudent
  */
-    const isStudent = confirm("Are you a student?");
+    const isStudent = confirm("Are you a student?\n\n OK = Yes | Cancel = No");
     const reusableCup =
       type === "coffee"
-        ? confirm("Brought reusable cup(s)? (+$1.00 otherwise)")
+        ? confirm(
+            "Brought reusable cup(s)? (+$1.00 otherwise)\n\n OK = Yes | Cancel = No",
+          )
         : true;
     const calc = processQuote(type, qty, isStudent, reusableCup);
     document.getElementById("receipt").textContent = buildReceipt(
